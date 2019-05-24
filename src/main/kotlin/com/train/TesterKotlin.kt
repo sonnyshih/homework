@@ -14,12 +14,14 @@ class TicketVendingMachine_KT{
     var totalRoundTripTicket: Int = 0
 
     fun start(){
-        while (true) {
+        var isContinue = true
+        while (isContinue) {
             inputFrom()
             inputTo()
             inputTotalTicket()
             inputTotalRoundTripTicket()
             printSummary()
+            isContinue = isContinueToOrderTicket()
         }
     }
 
@@ -89,6 +91,28 @@ class TicketVendingMachine_KT{
             }
         }
 
+    }
+
+    fun isContinueToOrderTicket():Boolean {
+        var isValidate: Boolean = false
+        var isContinue:Boolean = true
+        val scanner = Scanner(System.`in`)
+
+        while (!isValidate) {
+            print("Do you want to continue to order the ticket? (Y or N): ")
+            var answer = scanner.next()
+            if (!answer.toUpperCase().equals("Y") && !answer.toUpperCase().equals("N")) {
+                println("Please enter Y or N.")
+            } else {
+                if (answer.toUpperCase().equals("N")) {
+                    isContinue = false
+                }
+                isValidate=true
+            }
+
+        }
+
+        return isContinue
     }
 
     fun getTotalPrice(): Double {

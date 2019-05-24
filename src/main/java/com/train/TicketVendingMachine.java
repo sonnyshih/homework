@@ -9,12 +9,17 @@ public class TicketVendingMachine {
     private int totalRoundTripTicket;
 
     public void start(){
-        while (true) {
+
+        boolean isContinue = true;
+
+        while (isContinue) {
             inputFrom();
             inputTo();
             inputTotalTicket();
             inputTotalRoundTripTicket();
             printSummary();
+
+            isContinue = isContinueToOrderTicket();
         }
     }
 
@@ -85,6 +90,34 @@ public class TicketVendingMachine {
             }
         }
 
+    }
+
+    public boolean isContinueToOrderTicket() {
+        boolean isValidate = false;
+
+        boolean isContinue = true;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (!isValidate) {
+            System.out.print("Do you want to continue to order the ticket? (Y or N): ");
+            String answer = scanner.next();
+
+            if (!answer.toUpperCase().equals("Y") && !answer.toUpperCase().equals("N")) {
+                System.out.println("Please enter Y or N.");
+
+            } else {
+
+                if (answer.toUpperCase().equals("N")) {
+                    isContinue = false;
+                }
+
+                isValidate = true;
+            }
+
+        }
+
+        return isContinue;
     }
 
     public double getTotalPrice(){
